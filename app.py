@@ -40,7 +40,7 @@ def predict(image_path):
 
 # Streamlit app
 def main():
-    st.title('COVID-19 Pneumonia Detection App')
+    st.title('X-ray Image Classification App')
 
     # Upload an image through Streamlit
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
