@@ -16,13 +16,21 @@ except Exception as e:
     st.write(f"Make sure the file path '{model_path}' is correct.")
 
 # Function to preprocess the image and make predictions
+# Function to preprocess the image and make predictions
 def predict(image_path):
     try:
         img = Image.open(image_path)
         img = img.resize((224, 224))  # Assuming your model expects 224x224 images
-        img_array = np.array(img)
+
+        # Convert RGB image to grayscale
+        img_gray = img.convert("L")
+
+        img_array = np.array(img_gray)
         img_array = np.expand_dims(img_array, axis=0)
         img_array = img_array / 255.0  # Normalize the pixel values between 0 and 1
+
+        # Reshape to match the expected input shape (None, 224, 224, 1)
+        img_array = np.expand_dims(img_array, axis=-1)
 
         predictions = model.predict(img_array)
         return predictions
