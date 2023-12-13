@@ -1,3 +1,4 @@
+# app.py
 
 import streamlit as st
 from PIL import Image
@@ -7,7 +8,13 @@ from tensorflow.keras.preprocessing import image
 
 # Load your trained machine learning model
 model_path = 'fixedmodel.h5'
-model = load_model(model_path)
+
+try:
+    model = load_model(model_path)
+    st.write("Model loaded successfully!")
+except Exception as e:
+    st.write(f"Error loading the model: {e}")
+    st.write(f"Make sure the file path '{model_path}' is correct.")
 
 # Function to preprocess the image and make predictions
 def predict(image_path):
@@ -41,11 +48,9 @@ def main():
         # Make predictions on the uploaded image
         predictions = predict(uploaded_file)
 
-        st.subheader("Predictions:")
-        # Assuming your model outputs probabilities for each class
-        st.write(f"COVID-19 Probability: {predictions[0][0]:.2%}")
-        st.write(f"Pneumonia Probability: {predictions[0][1]:.2%}")
-        st.write(f"Normal Probability: {predictions[0][2]:.2%}")
-
-if __name__ == "__main__":
-    main()
+        if predictions is not None:
+            st.subheader("Predictions:")
+            # Assuming your model outputs probabilities for each class
+            st.write(f"COVID-19 Probability: {predictions[0][0]:.2%}")
+            st.write(f"Pneumonia Probability: {predictions[0][1]:.2%}")
+            st.write(f"Normal Probability: {
