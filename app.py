@@ -8,7 +8,7 @@ from tensorflow.keras.preprocessing import image
 
 # Load your trained machine learning model
 model_path = 'fixedmodel.h5'
-model = load_model(model_path, compile=False)
+model = load_model(model_path)
 
 # Function to preprocess the image and make predictions
 def predict(image_path):
