@@ -1,36 +1,9 @@
-# app.py
+# Add these imports at the beginning of your app.py file
+from sklearn.metrics import confusion_matrix, classification_report
+import seaborn as sns
+import matplotlib.pyplot as plt
 
-import streamlit as st
-from PIL import Image
-import numpy as np
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
-
-# Load your trained machine learning model
-model_path = 'fixedmodel.h5'
-model = load_model(model_path)
-
-# Manually compile the model
-model.compile(optimizer='adam',  # Choose an appropriate optimizer
-              loss='categorical_crossentropy',  # Choose an appropriate loss function
-              metrics=['accuracy'])  # Choose appropriate metrics
-
-# Function to preprocess the image and make predictions
-def predict(image_path):
-    try:
-        img = image.load_img(image_path, target_size=(224, 224))
-        img_array = image.img_to_array(img)
-        img_array = np.expand_dims(img_array, axis=0)
-        img_array = img_array / 255.0  # Normalize the pixel values between 0 and 1
-
-        # Convert RGB to grayscale
-        img_array = np.mean(img_array, axis=-1, keepdims=True)
-
-        predictions = model.predict(img_array)
-        return predictions
-    except Exception as e:
-        st.write(f"Error making predictions: {e}")
-        return None
+# ...
 
 # Streamlit app
 def main():
@@ -53,6 +26,19 @@ def main():
             st.write(f"COVID-19 Probability: {predictions[0][0]:.2%}")
             st.write(f"Pneumonia Probability: {predictions[0][1]:.2%}")
             st.write(f"Normal Probability: {predictions[0][2]:.2%}")
+
+            # Add confusion matrix and classification report
+            true_label = "Normal" if "Normal" in uploaded_file.name else "COVID-19"
+            predicted_label = "Normal" if predictions[0][2] > predictions[0][0] else "COVID-19"
+            st.write(f"True Label: {true_label}")
+            st.write(f"Predicted Label: {predicted_label}")
+
+            # Display confusion matrix
+            y_true = ["Normal", "COVID-19"]
+            y_pred = [predicted_label, true_label]
+            cm = confusion_matrix(y_true, y_pred, labels=["Normal", "COVID-19"])
+            sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=y_true, yticklabels=y_true)
+            st.pyplot(plt)
 
 if __name__ == "__main__":
     main()
