@@ -15,9 +15,9 @@ def load_model():
     try:
         model = load_model(model_path)
         return model
-    except Exception as e:
-        print(f"Error loading the model: {e}")
-        return None
+    # except Exception as e:
+    #     print(f"Error loading the model: {e}")
+    #     return None
 
 # Function to preprocess the image and make predictions
 def predict(image_path):
