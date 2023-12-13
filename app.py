@@ -1,9 +1,3 @@
-# Add these imports at the beginning of your app.py file
-from sklearn.metrics import confusion_matrix, classification_report
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# ...
 
 # Streamlit app
 def main():
