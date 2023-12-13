@@ -55,10 +55,17 @@ def main():
 
         if predictions is not None:
             st.subheader("Predictions:")
-            # Assuming your model outputs probabilities for each class
-            st.write(f"COVID-19 Probability: {predictions[0][0]:.2%}")
-            st.write(f"Pneumonia Probability: {predictions[0][1]:.2%}")
-            st.write(f"Normal Probability: {predictions[0][2]:.2%}")
+            
+            # Assuming your model outputs class indices (0, 1, 2)
+            predicted_class_index = np.argmax(predictions)
+            
+            # Dictionary of classes
+            class_mapping = {0: 'Normal', 1: 'Viral Pneumonia', 2: 'Covid'}
+
+            predicted_class = class_mapping[predicted_class_index]
+            
+            st.write(f"Predicted Class: {predicted_class}")
+            st.write(f"Probability: {predictions[0][predicted_class_index]:.2%}")
 
 if __name__ == "__main__":
     main()
