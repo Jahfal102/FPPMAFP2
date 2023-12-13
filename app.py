@@ -20,6 +20,8 @@ def load_model():
     #     return None
 
 # Function to preprocess the image and make predictions
+# Assuming the necessary imports have been done earlier in the script
+
 def predict(image_path):
     try:
         img = image.load_img(image_path, target_size=(224, 224))
@@ -35,6 +37,7 @@ def predict(image_path):
     except Exception as e:
         st.write(f"Error making predictions: {e}")
         return None
+
 
 # Streamlit app
 def main():
