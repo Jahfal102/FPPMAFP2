@@ -10,6 +10,11 @@ from tensorflow.keras.preprocessing import image
 model_path = 'fixedmodel.h5'
 model = load_model(model_path)
 
+# Manually compile the model
+model.compile(optimizer='adam',  # Choose an appropriate optimizer
+              loss='categorical_crossentropy',  # Choose an appropriate loss function
+              metrics=['accuracy'])  # Choose appropriate metrics
+
 # Function to preprocess the image and make predictions
 def predict(image_path):
     try:
