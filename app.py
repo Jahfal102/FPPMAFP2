@@ -53,4 +53,4 @@ def main():
             # Assuming your model outputs probabilities for each class
             st.write(f"COVID-19 Probability: {predictions[0][0]:.2%}")
             st.write(f"Pneumonia Probability: {predictions[0][1]:.2%}")
-            st.write(f"Normal Probability: {
+            st.write(f"Normal Probability: {predictions[0][2]:.2%}")
