@@ -7,14 +7,17 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 
 # Load your trained machine learning model
-model_path = 'fixedmodel.h5'
+from tensorflow.keras.models import load_model
 
-try:
-    model = load_model(model_path)
-    st.write("Model loaded successfully!")
-except Exception as e:
-    st.write(f"Error loading the model: {e}")
-    st.write(f"Make sure the file path '{model_path}' is correct.")
+def load_model():
+    model_path = 'fixedmodel.h5'  # Assuming the model is saved in a single HDF5 file
+
+    try:
+        model = load_model(model_path)
+        return model
+    except Exception as e:
+        print(f"Error loading the model: {e}")
+        return None
 
 # Function to preprocess the image and make predictions
 def predict(image_path):
