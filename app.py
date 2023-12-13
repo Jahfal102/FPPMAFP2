@@ -11,13 +11,20 @@ model = load_model(model_path)
 
 # Function to preprocess the image and make predictions
 def predict(image_path):
-    img = image.load_img(image_path, target_size=(224, 224))
-    img_array = image.img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0)
-    img_array /= 255.0  # Normalize the pixel values between 0 and 1 (assuming your model expects this)
+    try:
+        img = image.load_img(image_path, target_size=(224, 224))
+        img_array = image.img_to_array(img)
+        img_array = np.expand_dims(img_array, axis=0)
+        img_array = img_array / 255.0  # Normalize the pixel values between 0 and 1
 
-    predictions = model.predict(img_array)
-    return predictions
+        # Convert RGB to grayscale
+        img_array = np.mean(img_array, axis=-1, keepdims=True)
+
+        predictions = model.predict(img_array)
+        return predictions
+    except Exception as e:
+        st.write(f"Error making predictions: {e}")
+        return None
 
 # Streamlit app
 def main():
