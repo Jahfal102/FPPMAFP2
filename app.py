@@ -82,7 +82,7 @@ def main():
             predicted_class_index = np.argmax(predictions)
             
             # Dictionary of classes
-            class_mapping = {0: 'Normal', 1: 'Viral Pneumonia', 2: 'Covid'}
+            class_mapping = {0: 'Normal', 1: 'Viral Pneumonia', 2: 'Covid', 3: 'Unidentified'}
 
             predicted_class = class_mapping[predicted_class_index]
             
