@@ -8,11 +8,17 @@ import base64
 
 # Set the background image
 bg_image_path = 'bg1.jpg'
+bg_image_data = base64.b64encode(open(bg_image_path, "rb").read()).decode()
+bg_css = f"""
+    background-image: url('data:image/jpeg;base64,{bg_image_data}');
+    background-size: cover;
+"""
+
 st.markdown(
     f"""
     <style>
         .reportview-container {{
-            background: url(data:image/jpeg;base64,{base64.b64encode(open(bg_image_path, "rb").read()).decode()})
+            {bg_css}
         }}
     </style>
     """,
