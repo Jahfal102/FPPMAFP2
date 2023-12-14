@@ -1,5 +1,3 @@
-# app.py
-
 import streamlit as st
 from PIL import Image
 import numpy as np
@@ -21,7 +19,6 @@ def set_background(image_path):
 bg_image_path = 'bg1.jpg'
 set_background(bg_image_path)
 
-# Load your trained machine learning model
 model_path = 'fixedmodel.h5'
 
 try:
@@ -35,7 +32,7 @@ except Exception as e:
 def predict(image_path):
     try:
         img = Image.open(image_path)
-        img = img.resize((224, 224))  # Assuming your model expects 224x224 images
+        img = img.resize((224, 224)) 
 
         # Convert RGB image to grayscale
         img_gray = img.convert("L")
@@ -71,7 +68,7 @@ def main():
         if predictions is not None:
             st.subheader("Predictions:")
             
-            # Assuming your model outputs class indices (0, 1, 2)
+           
             predicted_class_index = np.argmax(predictions)
             
             # Dictionary of classes
