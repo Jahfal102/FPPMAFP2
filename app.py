@@ -6,19 +6,18 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import base64
 
-
- # Set the background image
-    bg_image_path = 'bg1.jpg'
-    st.markdown(
-        f"""
-        <style>
-            .reportview-container {{
-                background: url(data:image/jpeg;base64,{base64.b64encode(open(bg_image_path, "rb").read()).decode()})
-            }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+# Set the background image
+bg_image_path = 'bg1.jpg'
+st.markdown(
+    f"""
+    <style>
+        .reportview-container {{
+            background: url(data:image/jpeg;base64,{base64.b64encode(open(bg_image_path, "rb").read()).decode()})
+        }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Load your trained machine learning model
 model_path = 'fixedmodel.h5'
@@ -30,7 +29,6 @@ except Exception as e:
     st.write(f"Error loading the model: {e}")
     st.write(f"Make sure the file path '{model_path}' is correct.")
 
-# Function to preprocess the image and make predictions
 # Function to preprocess the image and make predictions
 def predict(image_path):
     try:
