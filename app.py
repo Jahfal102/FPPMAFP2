@@ -7,22 +7,15 @@ from tensorflow.keras.models import load_model
 import base64
 
 def set_background(image_path):
-    bg_image_data = base64.b64encode(open(image_path, "rb").read()).decode()
-    bg_css = f"""
-        background-image: url('data:image/jpeg;base64,{bg_image_data}');
-        background-size: cover;
-    """
-
-    st.markdown(
-        f"""
-        <style>
-            .reportview-container {{
-                {bg_css}
-            }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    page_bg_img = '''
+    <style>
+        body {
+            background-image: url("''' + image_path + '''");
+            background-size: cover;
+        }
+    </style>
+    '''
+    st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Set the background image
 bg_image_path = 'bg1.jpg'
