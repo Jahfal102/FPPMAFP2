@@ -6,24 +6,27 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import base64
 
+def set_background(image_path):
+    bg_image_data = base64.b64encode(open(image_path, "rb").read()).decode()
+    bg_css = f"""
+        background-image: url('data:image/jpeg;base64,{bg_image_data}');
+        background-size: cover;
+    """
+
+    st.markdown(
+        f"""
+        <style>
+            .reportview-container {{
+                {bg_css}
+            }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
 # Set the background image
 bg_image_path = 'bg1.jpg'
-bg_image_data = base64.b64encode(open(bg_image_path, "rb").read()).decode()
-bg_css = f"""
-    background-image: url('data:image/jpeg;base64,{bg_image_data}');
-    background-size: cover;
-"""
-
-st.markdown(
-    f"""
-    <style>
-        .reportview-container {{
-            {bg_css}
-        }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+set_background(bg_image_path)
 
 # Load your trained machine learning model
 model_path = 'fixedmodel.h5'
