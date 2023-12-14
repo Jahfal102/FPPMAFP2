@@ -58,7 +58,7 @@ def main():
     st.title('X-ray Image Classification App')
 
     # Upload an image through Streamlit
-    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+    uploaded_file = st.file_uploader("Choose an X-ray image...", type=["jpg", "jpeg", "png"])
 
     if uploaded_file is not None:
         # Display the uploaded image
