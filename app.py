@@ -27,7 +27,7 @@ def set_background(image_file):
     """
     st.markdown(style, unsafe_allow_html=True)
 
-set_background('/bg1.jpg')
+set_background('bg1.jpg')
 
 model_path = 'fixedmodel.h5'
 
