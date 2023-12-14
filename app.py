@@ -4,20 +4,30 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import base64
 
-def set_background(image_path):
-    page_bg_img = '''
-    <style>
-        body {
-            background-image: url("''' + image_path + '''");
-            background-size: cover;
-        }
-    </style>
-    '''
-    st.markdown(page_bg_img, unsafe_allow_html=True)
+def set_background(image_file):
+    """
+    This function sets the background of a Streamlit app to an image specified by the given image file.
 
-# Set the background image
-bg_image_path = 'bg1.jpg'
-set_background(bg_image_path)
+    Parameters:
+        image_file (str): The path to the image file to be used as the background.
+
+    Returns:
+        None
+    """
+    with open(image_file, "rb") as f:
+        img_data = f.read()
+    b64_encoded = base64.b64encode(img_data).decode()
+    style = f"""
+        <style>
+        .stApp {{
+            background-image: url(data:image/png;base64,{b64_encoded});
+            background-size: cover;
+        }}
+        </style>
+    """
+    st.markdown(style, unsafe_allow_html=True)
+
+set_background('/bg1.jpg')
 
 model_path = 'fixedmodel.h5'
 
